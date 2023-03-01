@@ -1,0 +1,24 @@
+- name: Install Tomcat Server
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Install Java
+    yum:
+      name: java
+      state: latest
+
+  - name: Download Tomcat Server Packages
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.72/bin/apache-tomcat-9.0.72.tar.gz
+      dest: /usr/local
+
+  - name: Extract Tomcat Server Packages
+    unarchive:
+      src: /usr/local/apache-tomcat-9.0.72.tar.gz
+      dest: /usr/local
+      remote_src: yes
+
+
+  - name: Start Tomcat Service
+    shell: nohup /usr/local/apache-tomcat-9.0.72/bin/startup.sh
