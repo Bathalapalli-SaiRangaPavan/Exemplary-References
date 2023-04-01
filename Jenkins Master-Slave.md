@@ -41,19 +41,19 @@ service jenkins status
 cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 - It will give password like(c860923a65af4a7cb187407dadcfff85) 
-- Copy and execute it in Jenkins Gui
-```
-Click (Install Suggested Plugin) 
-Username - admin 
-password - admin
-Confirm password - admin
-Full name - jenkins-practise 
-E-mail address - admin@gmail.com
-Click (Save and Continue)
-You can see jenkins url (http://Jenkins-MasterServerip:8080/)
-Click (Save and Finish)
-Click (Start using Jenkins)
-```
+##### Copy and execute it in Jenkins Gui
+
+- Click (Install Suggested Plugin) 
+- Username - admin 
+- Password - admin
+- Confirm password - admin
+- Full name - jenkins-practise 
+- E-mail address - admin@gmail.com
+- Click (Save and Continue)
+- You can see jenkins url (http://Jenkins-MasterServerip:8080/)
+- Click (Save and Finish)
+- Click (Start using Jenkins)
+
 #### Now You can able to see Jenkins Dashboard
 
 ### Step 3 - Launch an EC2 instance Name it as Jenkins-WorkerServer and login to the server 
@@ -72,19 +72,31 @@ amazon-linux-extras install java-openjdk11
 
 - Click (Manage Jenkins) 
 - Click (Manage Credentials) 
-under Stores scoped to Jenkins
+##### Under Stores scoped to Jenkins
 - Click (global)
-Global credentials (unrestricted)
+##### Global credentials (unrestricted)
 - Click (+ Add Credentials) 
 - Kind (SSH username with private key)
 - Scope (Global(jenkins,nodes,items,all child items, etc)
-id 
-- Jenkins-slave
-Username 
-- ec2-user
-Private key 
+- id (Jenkins-slave)
+- Username (ec2-user)
+##### Private key 
 - Click (Enter directly)
 - Click (ADD) 
 - (Give private key)
 - Click (create) 
 
+### Step 5 - Add Jenkins-WorkerServer as a slave to Jenkins-Master (make Jenkins-WorkerServer as a permanent agent)
+- Click (Manage Jenkins)
+- Click (Manage Nodes and Clouds) 
+- Click (New Node) 
+- Node name - Jenkins-slave
+- Click (Permanent Agent) 
+- Number of executors (2)
+- Remote root directory (/home/ec2-user/jenkins)
+- Lables (slave) 
+- Launch method - (Launch agent via ssh) 
+- Usage (only build jobs with label expressions matching this node) 
+- Launch Method - (give Jenkins-WorkerServer private key)
+- Host Key Verification Strategy - (Non verifyng Verification strategy) 
+- Click (save) 
