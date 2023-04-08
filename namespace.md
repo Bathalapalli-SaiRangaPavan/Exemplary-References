@@ -46,5 +46,5 @@ kubectl apply -f namespace.yaml
 #### To see all the namespaces
 
 ```
-kubectl apply -f namespace.yaml 
+ kubectl get namespaces
 ```
