@@ -1,0 +1,14 @@
+---
+- name: Install and start Apache web server
+  hosts: web
+  become: true
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start Apache service
+      service:
+        name: apache2
+        state: started
