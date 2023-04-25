@@ -5,11 +5,11 @@
   become: true
   
   tasks:
-    - name: Update apt 
+    - name: Update apt   
       apt:
         update_cache: yes
 
-    - name: Install Nginx
+    - name: Install Nginx 
       apt:
         name: nginx
         state: present
@@ -28,7 +28,7 @@
         - Restart Nginx
 
   handlers:
-    - name: Restart Nginx
+    - name: Restart Nginx Service
       systemd:
         name: nginx
         state: restarted
