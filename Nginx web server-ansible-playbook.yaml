@@ -1,0 +1,34 @@
+---
+- name: Install and configure Nginx
+  hosts: webserver
+  gather_facts: false
+  become: true
+  
+  tasks:
+    - name: Update apt 
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start Nginx service
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Configure Nginx
+      copy:
+        src: /path/to/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
