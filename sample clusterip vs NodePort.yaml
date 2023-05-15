@@ -1,0 +1,36 @@
+### Cluster Ip
+
+```
+apiVersion: v1
+kind: Service
+metadata:  
+  name: my-clusterip-service
+spec:
+  selector:    
+    app: nginx
+  type: ClusterIP
+  ports:  
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+```
+
+### NodePort 
+
+```
+apiVersion: v1
+kind: Service
+metadata:  
+  name: my-nodeport-service
+spec:
+  selector:    
+    app: nginx
+  type: NodePort
+  ports:  
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30036
+    protocol: TCP
+```
