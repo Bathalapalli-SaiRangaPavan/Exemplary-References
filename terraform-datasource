@@ -1,0 +1,43 @@
+provider "aws" {
+    region = "us-east-1"
+}
+
+resource "aws_instance" "myec2web" {
+    ami = "ami-0e731c8a588258d0d"
+    instance_type = "t2.micro"
+    tags = {
+      Name = "Web-Server" 
+    }
+    depends_on = [ aws_instance.myec2db ]
+
+}
+
+# To ensure that the database server (myec2db) is provisioned before the web server (myec2web), it's necessary to define a dependency using the depends_on attribute in the Terraform configuration.
+
+resource "aws_instance" "myec2db" {
+    ami = "ami-0e731c8a588258d0d"
+    instance_type = "t2.micro"
+    tags = {
+      Name = "DB-Server" 
+    }
+  
+}
+
+
+# To retrieve information about the availability zone in which the database server (myec2db) is running, you can use the appropriate Terraform data source or output statements to access this information.
+
+data "aws_instance" "dbseach" {
+    filter {
+      name = "tag:Name"
+      values = [ "DB-Server" ]
+    }
+    depends_on = [ 
+        "aws_instance.myec2db"
+     ]
+  
+}
+
+output "dbservers" {
+    value = data.aws_instance.dbseach.availability_zone
+  
+}
