@@ -1,0 +1,63 @@
+# Create a new folder name it as modules in a TFCERT folder(which is already created) and create a main.tf file 
+
+provider "aws" {
+    region = "us-east-1"
+  
+}
+
+
+
+# Now what we need to do is add our module block.
+
+module "webserver" {
+	source = "./db"
+
+}
+
+module "dbserver" {
+    source = "./db"
+  
+}
+
+
+# Inside module folder create new folder web and create a main.tf. We don't need to add a provider in web because we've already set it up in Main.tf.
+
+resource "aws_instance" "myec2web" {
+    ami = "ami-0e731c8a588258d0d"
+    instance_type = "t2.micro"
+    tags = {
+      name = "Web-Server"
+    }
+}
+
+
+# Inside module folder create new folder db and create main.tf. We don't need to add a provider in Db because we've already set it up in Main.tf.
+
+resource "aws_instance" "myec2db" {
+    ami = "ami-0e731c8a588258d0d"
+    instance_type = "t2.micro"
+    tags = {
+        name = "DB-Server"
+    }
+  
+}
+
+
+# What this is going to do is when we run TerraForm plan, it's going to look inside this folder. It's going to see it as a module. It's now going to look at this path. So inside here, then look inside DB Look at what it's got to set up.
+
+
+
+# Step by Step explanation of above code 
+
+1. Create a new folder named 'modules' in a folder named 'TFCERT'. This is where you're going to organize your Terraform configuration.
+2. Create a main.tf file in the modules folder. This file contains the main configuration for your Terraform setup.
+3. Configure the AWS provider. In main.tf, you've configured the AWS provider with your credentials and the region.
+4. Define two modules: webserver and dbserver. These modules are referencing folders named web and db, respectively.
+5. Inside the web module folder, create a main.tf file. This file contains the configuration for provisioning an AWS EC2 instance for a web server.
+6. Inside the db module folder, create a main.tf file. This file contains the configuration for provisioning an AWS EC2 instance for a database server.
+By organizing your Terraform configuration into modules, you're following best practices for managing infrastructure as code. Modules help you encapsulate reusable components and manage dependencies between different parts of your infrastructure.
+When you run terraform plan, Terraform will look into the modules directory, identify the modules (webserver and dbserver), and execute their configurations accordingly. It will then determine the changes needed to achieve the desired state specified in your Terraform configuration files.
+This setup provides modularity and reusability, making it easier to manage and scale your infrastructure configuration as your project grows.
+
+
+
