@@ -1,0 +1,48 @@
+Workspaces
+-----------
+Now what workspaces do is they effectively give us a way to split up a state file. It's a way of us logically separating the statefiles.
+
+# to see my workspaces 
+- terraform workspace list 
+
+# to create a workspace & it creates a new statefile 
+- terraform workspace new dev
+
+- terraform plan # u can see 2 resources to create 
+
+# to see workspace you are in 
+- terraform workspace show 
+
+# to swap into other workspace 
+- terraform workspace list 
+u get default, dev now ur currently in the dev workspace 
+# now i want to go to default workspace 
+- terraform worspace select default 
+
+# delete the workspace created (dev) 
+- terraform workspace delete dev
+
+
+state commands 
+---------------
+statefile - state is the ultimate truth. if any issues with statefile it causes lot of pain 
+# to see the resources currently inside 
+- terraform state list 
+
+# to see what ur statefile contained 
+- terraform state pull 
+
+# to rename the resources inside the statefile
+- terraform state mv aws_vpc.myvpc2 aws_vpc.my2ndvpc
+
+#we can also pass the command for backup before we make any change 
+- terraform state mv aws_vpc.myvpc2 aws_vpc.my2ndvpc -backup-out=<give path>>
+
+# delete the resource from statefile 
+- terraform state rm aws_vpc.my2ndvpc 
+
+Debugging commands
+---------------------
+mac/linux 
+# The most verbose logging can set is 
+- export TF_LOG=TRACE
