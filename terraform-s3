@@ -1,0 +1,12 @@
+# Declare the provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Define a sample resource - an AWS S3 bucket
+resource "aws_s3_bucket" "sample_bucket" {
+  bucket = "sample-bucket-name"
+  acl    = "private"
+}
+
+# When you apply this Terraform configuration, it will create an S3 bucket named "sample-bucket-name" in the specified AWS region (us-weast-1) with private access control.
