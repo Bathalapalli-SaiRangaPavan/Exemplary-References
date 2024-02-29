@@ -1,0 +1,49 @@
+# State file (terraform.tfstate) - Terraform uses a state file to track the resources it manages. This is a simplified and partial view of a Terraform state file to illustrate its structure.
+
+  "version": 4,
+  "terraform_version": "1.7.1",
+  "serial": 15,
+  "lineage": "48103276-2426-c370-5942-d7217bbde618",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "myvpc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:199674811532:vpc/vpc-0b63ed767123b4c40",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0832df6daf96f15f4",
+            "default_route_table_id": "rtb-093761e7f23375dd4",
+            "default_security_group_id": "sg-05abcf430cfc92dfd",
+            "dhcp_options_id": "dopt-0a826ee8859991fe6",
+            "enable_dns_hostnames": false,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-0b63ed767123b4c40",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-093761e7f23375dd4",
+            "owner_id": "199674811532",
+            "tags": null,
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
