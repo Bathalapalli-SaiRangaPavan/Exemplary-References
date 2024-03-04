@@ -1,0 +1,3 @@
+if [ -e "$1" ]; then 
+    echo "File is present"
+fi
