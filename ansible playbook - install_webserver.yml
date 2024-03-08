@@ -1,0 +1,25 @@
+---
+- hosts: dev
+  tasks:
+  - name: This task to instal webserver
+    become: yes
+    yum:
+     name: httpd
+     state: latest
+  - name: copy index.html to target
+    become: yes
+    copy:
+     src: index.html
+     dest: /var/www/html
+  - name: Copy httpd.conf file to the targets
+    become: yes
+    copy:
+     src: httpd.conf
+     dest: /etc/httpd/conf
+  - name: start webserver service
+    become: yes
+    service:
+     name: httpd
+     state: restarted
+    
+    
