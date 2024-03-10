@@ -1,0 +1,10 @@
+---
+- name: Install Application Tree
+  hosts: localhost
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Copy application tree
+      copy:
+        src: src_path
+        dest: dest_path
