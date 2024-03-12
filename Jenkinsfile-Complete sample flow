@@ -1,0 +1,58 @@
+pipeline {
+    agent {
+        label "test-1"
+    }
+    environment {
+        MAVEN_HOME = tool 'Maven'
+        DOCKER_IMAGE = 'your-docker-image'
+        KUBE_NAMESPACE = 'Your namespace'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout from Git repository
+                git 'https://github.com/your/repository.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Building..."
+                sh "${env.MAVEN_HOME}/bin/mvn clean package"
+            }
+        }
+        stage('Sonar') {
+            steps {
+                echo "Running SonarQube analysis..."
+                sh "mvn sonar:sonar"
+            }
+        }
+        stage('Docker Image') {
+            steps {
+                echo "Building Docker image..."
+                sh "docker build -t ${env.DOCKER_IMAGE} ."
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                echo "Pushing Docker image..."
+                sh "docker push ${env.DOCKER_IMAGE}"
+            }
+        }
+        stage('Kubernetes Deploy') {
+            steps {
+                echo "Deploying to Kubernetes..."
+                sh "kubectl apply -f deployment.yaml -n ${env.KUBE_NAMESPACE}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "The pipeline was successful."
+        }
+        failure {
+            echo "The pipeline failed."
+        }
+    }
+}
