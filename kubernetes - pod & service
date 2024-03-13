@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    createdby: Pavan
+    env: dev
+spec:
+  containers:
+    - name: web-container
+      image: httpd
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort
+  selector:
+    createdby: Pavan
+  ports:
+    - nodePort: 31000
+      port: 80
+      targetPort: 80
