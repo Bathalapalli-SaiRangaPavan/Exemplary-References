@@ -1,0 +1,19 @@
+resource "aws_instance" "myinstance" {
+  ami           = "ami-0261755bbcb8c4a84"
+  instance_type = "t2.micro"
+}
+
+provisioner "remote-exec" {
+  inline = [
+    "sudo yum update -y",
+    "sudo yum install -y httpd",
+    "sudo systemctl start httpd",
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("~/.ssh/id_rsa")
+    host        = aws_instance.example.public_ip
+  }
+}
