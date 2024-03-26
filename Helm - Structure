@@ -1,0 +1,9 @@
+my-chart/
+  ├── charts/            # Directory containing dependencies
+  ├── templates/         # Directory containing Kubernetes manifests
+  │   ├── deployment.yaml
+  │   ├── service.yaml
+  │   └── ...            # Other Kubernetes manifest files
+  ├── values.yaml        # Default configuration values for the chart
+  ├── Chart.yaml         # Metadata for the chart
+  └── README.md          # Documentation for the chart
