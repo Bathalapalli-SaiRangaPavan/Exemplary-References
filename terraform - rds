@@ -1,0 +1,16 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_db_instance" "exampledb" {
+  allocated_storage    = 20
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t2.micro"
+  name                 = "mydatabase"
+  username             = "admin"
+  password             = "password123"
+  parameter_group_name = "default.mysql8.0"
+  db_subnet_group_name = "my-db-subnet-group"
+  vpc_security_group_ids = ["sg-xxxxxxxx"] # Replace with your security group ID
+}
